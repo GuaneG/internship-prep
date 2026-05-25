@@ -13,10 +13,8 @@ Amaç: Python temelini, özellikle data analysis ve pandas hazırlığı için t
 6. Strings and Dictionaries  
 7. Working with External Libraries  
 8. En Önemli Python Tipleri  
-9. Tek Satırlık Faydalı Çözümler  
-10. Staj İçin Önemli Noktalar  
-11. Python Basics Practice Örneği  
-
+9. Tek Satırlık Faydalı Çözümler
+  
 ---
 
 # 1. Hello, Python
