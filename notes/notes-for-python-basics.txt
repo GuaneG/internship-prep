@@ -1,0 +1,409 @@
+Python Basics Notes
+
+1. Veri Tipleri
+
+List:
+- Array gibi çalışır.
+- Sıralıdır.
+- Değiştirilebilir.
+- Aynı elemandan birden fazla tutabilir.
+
+Örnek:
+numbers = [10, 20, 30, 20]
+
+
+Tuple:
+- List/array yapısına benzer.
+- Sıralıdır.
+- Immutable'dır, yani oluşturulduktan sonra değiştirilemez.
+
+Örnek:
+coordinates = (10, 20)
+
+
+Dict:
+- HashMap gibi çalışır.
+- Key-value pair saklar.
+- Key üzerinden value'ya erişilir.
+- Key'ler unique olmalıdır.
+
+Örnek:
+student = {
+    "name": "Can",
+    "department": "Software Engineering",
+    "year": 3
+}
+
+
+Set:
+- List'e benzer ama iki temel farkı vardır:
+  1. Sıralı değildir.
+  2. Aynı elemandan birden fazla tutmaz.
+- Unique değerleri bulmak için kullanışlıdır.
+
+Örnek:
+departments = {"SE", "CE", "SE", "DS"}
+# Sonuç: {"SE", "CE", "DS"}
+
+
+2. Python Syntax
+
+- Python'da Java/C/C++ gibi satır sonunda ; kullanmak zorunlu değildir.
+- Kod blokları için {} kullanılmaz.
+- Python indentation kullanır.
+- Eğer bir blok açılacaksa, örneğin function, if, for, while gibi yapılarda satırın sonuna : koyulur.
+- Sonraki satırda genelde 4 whitespace / 1 tab kadar girinti yapılır.
+
+Örnek:
+
+if grade >= 60:
+    print("Passed")
+else:
+    print("Failed")
+
+
+3. Function Syntax
+
+Python'da fonksiyon tanımlamak için def kullanılır.
+
+Örnek:
+
+def calculate_average(math, programming, database):
+    total = math + programming + database
+    average = total / 3
+    return average
+
+
+4. If / Else Syntax
+
+Örnek:
+
+grade = 75
+
+if grade >= 90:
+    print("AA")
+elif grade >= 80:
+    print("BA")
+elif grade >= 60:
+    print("Passed")
+else:
+    print("Failed")
+
+
+5. Loop Syntax
+
+For loop:
+
+grades = [80, 90, 70]
+
+for grade in grades:
+    print(grade)
+
+
+While loop:
+
+counter = 0
+
+while counter < 5:
+    print(counter)
+    counter += 1
+   
+6. Python Built-in Helper Functions
+
+Python'da bir object, variable, function, module veya library hakkında bilgi almak için bazı built-in helper function'lar kullanılır.
+
+Bunlar özellikle bir kütüphane importladığımda içinde hangi methodlar, attribute'lar veya kullanılabilir özellikler var görmek için işime yarar.
+
+
+6.1 type()
+
+type(), bir değişkenin veya object'in veri tipini gösterir.
+
+Örnek:
+
+number = 10
+name = "Can"
+grades = [80, 90, 70]
+student = {"name": "Can", "department": "Software Engineering"}
+
+print(type(number))
+print(type(name))
+print(type(grades))
+print(type(student))
+
+Çıktı örneği:
+
+<class 'int'>
+<class 'str'>
+<class 'list'>
+<class 'dict'>
+
+Ne zaman kullanılır?
+- Bir değişkenin hangi tipte olduğunu anlamak için.
+- CSV/JSON okurken gelen verinin list mi dict mi string mi olduğunu kontrol etmek için.
+- Bir kütüphaneden gelen object'in tipini anlamak için.
+
+
+6.2 dir()
+
+dir(), bir object'in veya module'ün içinde kullanılabilecek attribute ve methodları listeler.
+
+Örnek:
+
+name = "Can"
+print(dir(name))
+
+Bu, string object'i üzerinde kullanılabilecek methodları gösterir.
+Mesela:
+upper, lower, split, replace, strip gibi methodları görebilirim.
+
+Örnek:
+
+grades = [80, 90, 70]
+print(dir(grades))
+
+Bu, list üzerinde kullanabileceğim methodları gösterir.
+Mesela:
+append, remove, pop, sort, reverse gibi methodları görebilirim.
+
+Library/module için örnek:
+
+import math
+
+print(dir(math))
+
+Bu, math module içindeki fonksiyonları ve sabitleri gösterir.
+Mesela:
+sqrt, pow, ceil, floor, pi gibi şeyleri görebilirim.
+
+Ne zaman kullanılır?
+- Bir object'in hangi methodlara sahip olduğunu görmek için.
+- Bir module importladıktan sonra içinde ne var keşfetmek için.
+- Method adını hatırlayamadığımda bakmak için.
+
+
+6.3 help()
+
+help(), bir object, function, module veya method hakkında açıklama/dokümantasyon gösterir.
+
+Örnek:
+
+help(str)
+
+String tipi hakkında dokümantasyon gösterir.
+
+Örnek:
+
+help(list.append)
+
+list içindeki append methodunun nasıl çalıştığını gösterir.
+
+Örnek:
+
+import math
+help(math.sqrt)
+
+math.sqrt fonksiyonunun ne yaptığını gösterir.
+
+Örnek:
+
+help(print)
+
+print fonksiyonunun parametrelerini ve kullanımını gösterir.
+
+Ne zaman kullanılır?
+- Bir fonksiyonun ne işe yaradığını öğrenmek için.
+- Hangi parametreleri aldığını görmek için.
+- Kütüphanenin kendi yazılmış docstring'lerini okumak için.
+
+
+6.4 __doc__
+
+__doc__, bir function, class veya module için yazılmış documentation string'i gösterir.
+
+Örnek:
+
+print(print.__doc__)
+
+Örnek:
+
+import math
+print(math.sqrt.__doc__)
+
+Kendi fonksiyonumda örnek:
+
+def calculate_average(grades):
+    \"\"\"Calculate the average of a list of grades.\"\"\"
+    return sum(grades) / len(grades)
+
+print(calculate_average.__doc__)
+
+Çıktı:
+
+Calculate the average of a list of grades.
+
+Ne zaman kullanılır?
+- help() kadar detaylı olmayan kısa açıklamayı görmek için.
+- Bir function'ın docstring'ini hızlıca okumak için.
+
+
+6.5 hasattr()
+
+hasattr(), bir object'in belirli bir attribute veya methoda sahip olup olmadığını kontrol eder.
+
+Örnek:
+
+name = "Can"
+
+print(hasattr(name, "upper"))
+print(hasattr(name, "append"))
+
+Çıktı:
+
+True
+False
+
+Çünkü string object'inde upper methodu vardır ama append yoktur.
+
+Ne zaman kullanılır?
+- Bir object'te belirli bir özellik veya method var mı kontrol etmek için.
+- Özellikle farklı tipte object'lerle çalışırken hata almadan önce kontrol yapmak için.
+
+
+6.6 getattr()
+
+getattr(), bir object'in attribute veya methodunu ismiyle çağırmak için kullanılır.
+
+Örnek:
+
+name = "Can"
+
+upper_method = getattr(name, "upper")
+print(upper_method())
+
+Çıktı:
+
+CAN
+
+Default değerle kullanım:
+
+print(getattr(name, "append", "This method does not exist"))
+
+Çıktı:
+
+This method does not exist
+
+Ne zaman kullanılır?
+- Attribute veya method adını string olarak bildiğim durumlarda.
+- Dynamic olarak method çağırmak gerektiğinde.
+- Bir attribute yoksa default değer döndürmek için.
+
+
+6.7 vars()
+
+vars(), bir object'in __dict__ attribute'unu döndürür.
+Yani object'in sahip olduğu attribute'ları dictionary olarak gösterir.
+
+Örnek:
+
+class Student:
+    def __init__(self, name, department, year):
+        self.name = name
+        self.department = department
+        self.year = year
+
+student = Student("Can", "Software Engineering", 3)
+
+print(vars(student))
+
+Çıktı:
+
+{'name': 'Can', 'department': 'Software Engineering', 'year': 3}
+
+Ne zaman kullanılır?
+- Bir object'in içinde hangi attribute'lar var görmek için.
+- Class instance'larını debug ederken.
+
+
+6.8 id()
+
+id(), bir object'in memory identity değerini gösterir.
+
+Örnek:
+
+a = [1, 2, 3]
+b = a
+c = [1, 2, 3]
+
+print(id(a))
+print(id(b))
+print(id(c))
+
+a ve b aynı object'i gösterdiği için id değerleri aynıdır.
+c ise aynı değerlere sahip olsa bile farklı object'tir.
+
+Ne zaman kullanılır?
+- İki değişken aynı object'i mi gösteriyor anlamak için.
+- Mutable object davranışlarını anlamak için.
+
+
+7. Kütüphane veya Object Keşfetme Akışı
+
+Bir şeyi importladığımda veya yeni bir object ile karşılaştığımda şu sırayla inceleyebilirim:
+
+1. type() ile object'in tipine bak.
+2. dir() ile içinde hangi methodlar/attribute'lar var bak.
+3. help() ile kullanmak istediğin methodun dokümantasyonuna bak.
+4. __doc__ ile kısa açıklamayı oku.
+5. hasattr() ile belirli bir method/attribute var mı kontrol et.
+6. getattr() ile gerekirse methodu dinamik çağır.
+7. vars() ile class instance attribute'larını gör.
+
+
+Örnek keşif:
+
+import pandas as pd
+
+print(type(pd))
+print(dir(pd))
+help(pd.read_csv)
+print(pd.read_csv.__doc__)
+
+Bu örnekte:
+- pd'nin ne olduğunu görürüm.
+- pandas içinde hangi fonksiyonlar var bakarım.
+- read_csv fonksiyonunun nasıl kullanıldığını help ile öğrenirim.
+- read_csv'nin docstring'ini okuyabilirim.
+
+
+8. Student Grades Üzerinden Örnek
+
+grades = [80, 90, 70]
+
+print(type(grades))
+print(dir(grades))
+help(grades.append)
+
+grades.append(85)
+print(grades)
+
+student = {
+    "name": "Can",
+    "department": "Software Engineering",
+    "year": 3
+}
+
+print(type(student))
+print(dir(student))
+help(student.get)
+
+print(student.get("name"))
+print(student.get("gpa", "GPA not found"))
+
+Bu örnekte:
+- grades değişkeninin list olduğunu görürüm.
+- list methodlarını dir ile incelerim.
+- append methodunu help ile öğrenirim.
+- student değişkeninin dict olduğunu görürüm.
+- dict methodlarını incelerim.
+- get methodunu kullanarak güvenli veri çekerim.

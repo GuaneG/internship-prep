@@ -30,7 +30,7 @@
 
 ## 1. Hafta (24 Mayıs-30 Mayıs)
 
-#### Python data temeli [ ]
+#### Python data temeli \[:white_check_mark:](Not Eklendi -->  notes/notes-for-python-basics.txt)
     * Python’u data işlemleri için hızlıca tekrar etmek.
     * Kaynak = Kaggle Learn - Python
 #### SQL temel tekrar [ ]

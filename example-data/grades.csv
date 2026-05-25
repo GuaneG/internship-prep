@@ -1,0 +1,16 @@
+student_id,first_name,last_name,department,year,math,programming,database,english,attendance_rate
+1001,Can,Gere,Software Engineering,3,82,88,91,76,0.92
+1002,Azra,Demir,Software Engineering,3,74,81,79,85,0.88
+1003,Efe,Yilmaz,Computer Engineering,2,65,72,70,68,0.80
+1004,Deniz,Kaya,Software Engineering,1,90,94,87,82,0.96
+1005,Elif,Sahin,Data Science,2,78,85,89,91,0.93
+1006,Mert,Arslan,Computer Engineering,4,58,64,61,73,0.74
+1007,Zeynep,Aksoy,Software Engineering,2,88,90,92,89,0.97
+1008,Bora,Celik,Data Science,3,69,77,83,80,0.86
+1009,Selin,Aydin,Computer Engineering,1,92,89,85,94,0.95
+1010,Kaan,Polat,Software Engineering,4,55,62,67,70,0.71
+1011,Ayse,Kurt,Data Science,1,81,84,86,88,0.90
+1012,Emir,Ozkan,Computer Engineering,3,73,79,75,77,0.84
+1013,Lara,Aslan,Software Engineering,2,96,98,94,93,0.99
+1014,Tuna,Eren,Data Science,4,61,70,74,69,0.78
+1015,Mina,Bozkurt,Computer Engineering,2,84,87,82,90,0.91
