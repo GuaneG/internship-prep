@@ -89,6 +89,7 @@
 
 # Notes
 
+
 ## Python Data Temeli
 
 - [Python basics önemli olduğunu düşündüğüm text notları ](notes/notes-for-python-basics.txt)
