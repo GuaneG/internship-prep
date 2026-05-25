@@ -407,3 +407,25 @@ Bu örnekte:
 - student değişkeninin dict olduğunu görürüm.
 - dict methodlarını incelerim.
 - get methodunu kullanarak güvenli veri çekerim.
+
+List comprehension:
+
+squares = [x ** 2 for x in numbers]
+
+Filtreli list comprehension:
+
+even_numbers = [x for x in numbers if x % 2 == 0]
+
+Koşullu dönüşüm:
+
+labels = ["high" if x > 100 else "low" for x in sales]
+
+Tek satırlık kısa çözümler:
+
+doubled = [x * 2 for x in numbers]
+squares = [x ** 2 for x in numbers]
+evens = [x for x in numbers if x % 2 == 0]
+positives = [x for x in numbers if x > 0]
+names_upper = [name.upper() for name in names]
+long_names = [name for name in names if len(name) > 5]
+total_sales = [price * quantity for price, quantity in orders]

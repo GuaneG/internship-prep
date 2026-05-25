@@ -5,11 +5,13 @@
  ### Dosya yapısı
  `çalışılan-gün_çalışılan-konu_çalışılan-konu-altbaşlığı.extension`
 
-
+---
 
 # Goals
 
 * Staja başlamadan önce SQL + Python/pandas + Power BI + temel cloud + temel AI konularında küçük ama gösterilebilir bir portfolyo hazırlamak.
+
+---
 
 # Tools
 
@@ -21,6 +23,7 @@
     * Pandas
     * Matplotlib
 
+---
 
 # Weeky Plan
 
@@ -53,9 +56,7 @@
     * Pandas ile analiz yapmaya başlamak.        
     * Kaynak = pandas official getting started tutorials
 
-<br>
-<br>
-<br>
+---
    
 ## 2. Hafta (31 Mayıs- 7 Haziran)
 
@@ -82,5 +83,13 @@
     * Basit bir model veya AI destekli analiz mantığı görmek.        
     * Kaynak = Roadmapteki TODO'ları yap
      
+---
 
 # Notes
+
+
+## Python Data Temeli
+
+- [Python basics önemli olduğunu düşündüğüm text notları ](notes/notes-for-python-basics.txt)
+- [Kaggle Python basics summary - Markdown](notes/kaggle_python_basics_summary.md)
+- [Kaggle Python basics summary - Jupyter Notebook](notes/kaggle_python_basics_summary.ipynb)
