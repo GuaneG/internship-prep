@@ -94,13 +94,13 @@
 
 ## Python Data Temeli
 
-- [Python basics önemli olduğunu düşündüğüm text notları ](notes/notes-for-python-basics.txt)
-- [Kaggle Python basics summary - Markdown](notes/kaggle_python_basics_summary.md)
+- [Python basics önemli olduğunu düşündüğüm text notları ](notes/day01/notes-for-python-basics.txt)
+- [Kaggle Python basics summary - Markdown](notes/day01/kaggle_python_basics_summary.md)
 - [Kaggle Python basics summary - Jupyter Notebook](notes/kaggle_python_basics_summary.ipynb)
 
 ## SQL Tekrarı
 
-- [SQL Tekrarı için benim notlarım](notes/notes-for-sql-practice-and-bigquery.md)
-- [Kaggle Intro to SQL summary - Markdown](notes/notes-for-sql-practice-and-bigquery.md)
-- [Kaggle Intro to SQL summary - Jupyter Notebook](notes/notes-for-sql-practice-and-bigquery.ipynb)
+- [SQL Tekrarı için benim notlarım](notes/day02/notes-for-sql-practice-and-bigquery.md)
+- [Kaggle Intro to SQL summary - Markdown](notes/day02/notes-for-sql-practice-and-bigquery.md)
+- [Kaggle Intro to SQL summary - Jupyter Notebook](notes/day02/notes-for-sql-practice-and-bigquery.ipynb)
 

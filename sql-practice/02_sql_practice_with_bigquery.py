@@ -59,3 +59,4 @@ safe_query_job = client.query(query, job_config=safe_config)
 # API request - try to run the query, and return a pandas DataFrame
 safe_query_job.to_dataframe()
 
+### SQL QUERY'LERİ MySQL WORKBENCH DE YAZDIN ###
