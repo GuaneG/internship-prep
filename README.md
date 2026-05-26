@@ -41,12 +41,14 @@
     * SELECT, WHERE, ORDER BY, DISTINCT, AND, OR konularını tekrar etmek.
     * Kaynak = Kaggle Learn - Intro to SQL     
     **Not Eklendi --> notes/notes-for-sql-practice-and-bigquery.md**
-#### SQL JOIN mantığı [ ]
+#### SQL JOIN mantığı [✅]
     * Tabloları bağlamayı tekrar etmek.
     * Kaynak = Kaggle Learn - Intro to SQL
-#### SQL GROUP BY + aggregate functions [ ]
+    **Not Eklendi --> notes/kaggle_intro_to_sql_summary.md**
+#### SQL GROUP BY + aggregate functions [✅]
     * Veriyi gruplama ve özetleme mantığını oturtmak.        
     * Kaynak = Kaggle Learn - Intro to SQL
+    **Not Eklendi --> notes/kaggle_intro_to_sql_summary.md*
 #### SQL subquery + CASE WHEN [ ]
     * Analitik sorgular yazmaya başlamak..        
     * Kaynak = Kaggle Learn - Advanced SQL başlangıcı    
