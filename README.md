@@ -37,10 +37,10 @@
     * Python’u data işlemleri için hızlıca tekrar etmek.
     * Kaynak = Kaggle Learn - Python
     **Not Eklendi --> notes/notes-for-python-basics.txt**
-
-#### SQL temel tekrar [ ]
+#### SQL temel tekrar [✅]
     * SELECT, WHERE, ORDER BY, DISTINCT, AND, OR konularını tekrar etmek.
     * Kaynak = Kaggle Learn - Intro to SQL     
+    **Not Eklendi --> notes/notes-for-sql-practice-and-bigquery.md**
 #### SQL JOIN mantığı [ ]
     * Tabloları bağlamayı tekrar etmek.
     * Kaynak = Kaggle Learn - Intro to SQL
@@ -95,3 +95,10 @@
 - [Python basics önemli olduğunu düşündüğüm text notları ](notes/notes-for-python-basics.txt)
 - [Kaggle Python basics summary - Markdown](notes/kaggle_python_basics_summary.md)
 - [Kaggle Python basics summary - Jupyter Notebook](notes/kaggle_python_basics_summary.ipynb)
+
+## SQL Tekrarı
+
+- [SQL Tekrarı için benim notlarım](notes/notes-for-sql-practice-and-bigquery.md)
+- [Kaggle Intro to SQL summary - Markdown](notes/notes-for-sql-practice-and-bigquery.md)
+- [Kaggle Intro to SQL summary - Jupyter Notebook](notes/notes-for-sql-practice-and-bigquery.ipynb)
+
