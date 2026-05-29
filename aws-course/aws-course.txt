@@ -1,0 +1,355 @@
+
+__module 1__
+
+aws 
+
+-you only pay for what you use 
+
+cloud computing = on demand delivery of IT resources over the internet
+with pay as you go pricing
+
+aws shared responsibilty model 
+aws is responsible for -> security of cloud
+customer is responsible for-> security in the cloud 
+
+regions and az(availability zones)
+
+__module 2__
+
+amazon elastic compute cloud (ec2)
+
+compute = refers to the processing power needed to run applications, 
+manage data, and perform calculations
+
+ec2 instances is VM's(virtual machine) 
+
+
+Multi-tenancy in Amazon EC2 refers to multiple tenants, or users, 
+sharing the same instance but maintaining isolation for security and performance.
+
+multitenancy = sharing underlying hardware between virtual machines each, vm is isolated
+from each other but share's resource this isolation and resource sharing is done
+by a software called hypervisor which is running on host machine.
+(((CaaS)))
+
+ec2 instances
+
+-each ec2 instance type is grouped under an instance family
+*general purpose
+*compute optimized
+*memory optimized
+*accelerated computing
+*storage optimized
+
+bu instanceların yönetimi api call'lar ile yapılıyor
+
+bu api calllarıda
+
+aws management console(browser based),aws cli,aws sdk(python) ile yapabilirsin
+
+ami = amazon machine image
+
+vertical scaling adding more power to machines add power for per instance
+
+horizontal scaling adding more resources 
+
+amazon ec2 auto scaling adds or removes instance's based on demands and 
+key scaling metrics buda başka bir aws service ile birlikte sağlanıyor
+bunuda amazon cloudwatch service yapıyor
+
+
+
+3 tane settingi var     ???
+minimum,desired,maximum ???
+
+
+load balancer = takes in requests and routes them to ec2 intances 
+ama bunu configure ve manage etmen lazım bunun çözümü içinde
+
+elastic load balancing (elb) devreye giriyor 
+= designed to distribute network trafic to improve app scalability
+can manage both internal and external trafic to aws
+
+elb trafic distribution için farklı routing methodlar kullanır:
+-round robin = distributes traffic evenly across all available servers
+-least connections = routes trafic to the server with the fewest active connections
+-ip hash = uses the clients ip add to consistently route traffic to the same server
+-least response time = directs traffic to the server with fastest reponse time
+
+__module 3__
+
+ec2 is unmanaged service so u have to maintain the server itself 
+
+elb,sqs,sns is managed service
+
+serverless = you cannot see or access the underlying infrastructure
+
+
+elb ve ec2 auto scaling birlikte kullanılır 
+
+amazon simple queue service(sqs) = for buffer and loosely coupled app's
+payload = data contained with a message
+
+amazon simple notification service(sns) = a channel for messages to be delivered
+
+aws lambda = serverless compute service also known as funciton as a service
+
+u specify a trigger to run the lambda function
+
+max duration of a lambda func is 15min
+
+lambda is great for event-driven processes
+
+while creating a lambda function u can write a func yourself,use a blueprint
+,or use a container image
+
+u must select execution rule
+
+must select a policy template for permissions
+
+must select a trigger
+
+container = containers solve the "it works on my machine" portability problem by providing
+a consistent env that can be replicated anywhere
+
+amazon elastic container services (ecs) 
+is a scalable container orchestration service for running and managing containers on AWS, like Docker containers. 
+Docker is a software platform for building, testing, and deploying applications quickly.
+
+amazon elastic kubernetes services (eks)
+is a fully managed service for running Kubernetes on AWS. 
+It simplifies deploying, managing, and scaling containerized applications using 
+open-source Kubernetes, with ongoing support and updates from the broader community.
+
+ecs,eks orchestrate containers;in other words orchestration services
+
+amazon elastic container registry (ecr) = fully managed container registry that stores your container images
+(Amazon ECR) is where you can store, manage, and deploy container images. 
+It supports container images that follow the Open Container Initiative (OCI) standards.
+You can push, pull, and manage images in your Amazon ECR repositories using standard container tooling and command line interfaces (CLIs).
+
+a basic flow
+
+* start uploading a container image to ecr
+* choose your container orchestration service based on your needs ecs or eks
+* select platform to run your container ec2 or fargate
+
+fargate =Fargate is a serverless compute engine for containers. 
+It works with both Amazon ECS and Amazon EKS. 
+Fargate is a container hosting platform, unlike Amazon ECS and Amazon EKS, 
+which are both container orchestration services.
+
+additional compute services
+
+elastic beanstalk(web applications,RESTful APIs,mobile backend services,microservices architectures,automated scaling,simplified infrastructure management),
+aws batch(processing large-scale,parallel workloads),
+lightsail(basic web apps,dev and testing environments,learning cloud services)
+
+aws outposts is hybrid cloud solution
+
+__module 4__
+
+going global, aws infastructure
+edge locations,az,regions
+aws cloudformation is IaC
+
+__module 5__
+
+vpc = virtual private cloud help you provision a logically isolated section of the aws cloud
+private,public
+
+Subnets= chunks of IP addresses in your VPC that you can use to group resources together.
+is used to organize resources, share resources publicly, 
+or isolate resources to keep them private.
+
+to allow trafic from the public internet to flow into and out
+of vpc you must attach "internet gateway" to vpc 
+internet gateway = is like a doorway that is open to the public 
+
+virtual private gateway for private subnets
+
+network access control list (acl) = checks traffic going into and leaving a subnet
+
+subnet içindeki instance'ları kontrol etmediğinden her instance'sın da bir güvenliği olmalı
+ec2 instance'larının default olarak security groupları vardır and by default all 
+ports are blocked to in traffic but all out traffic is allowed
+
+security groups are statefull(has memory)
+network acl's are stateless (no memory)
+
+amazon route 53 is the dns (domain name server)
+
+amazon cloudfront = is a content delivery network (cdn) service that delivers
+your content with faster loading times
+
+aws global accelerator is a service that uses the aws global network to 
+improve app availability,security,performance
+
+
+__module 6__
+
+--block storage = divides data into pieces called blocks,direct data access without system layers
+best for app's that databases needing fast,freq. updates
+
+Block storage provides persistent, low-latency block-level storage volumes that attach to EC2 instances like physical hard drives. 
+Block storage volumes can be encrypted, backed up via snapshots, and modified while in use without disrupting the instance. 
+
+AWS offers two primary block storage services:
+
+*Amazon EC2 instance store
+An unmanaged non-persistent, high-performance block storage directly attached to EC2 instances for temporary data.
+best for temporary memory-based storage needs like buffers, caches, and scratch data
+no data persistance
+
+*Amazon Elastic Block Store (EBS)
+A managed service that provides persistent block storage volumes for EC2 instances, offering various types for different workloads
+data persistance
+
+volumes attach to ec2 instances
+availability zone(az) level resource
+must be at the same az with to attach ec2 instances 
+do not automatically scale up or down
+
+-Amazon ebs snapshots are point-in-time backups of EBS volume.They can be used for disaster recovery, data migration, 
+volume resizing, and for creating consistent backups of production workloads.
+-EBS snapshots are incremental,so they only save the blocks on the volume that have changed after your most recent snapshot.
+-EBS snapshots can be used to create multiple new volumes, 
+and new volumes created from a snapshot are an exact copy of the original volume at the time the snapshot was taken.
+Snapshots of EBS volumes are stored redundantly in multiple Availability Zones using Amazon S3.  
+
+-Amazon Data Lifecycle Manager
+You can automate the creation, retention, and deletion of EBS snapshots using Amazon Data Lifecycle Manager. 
+Amazon Data Lifecycle Manager can schedule snapshots during off-peak hours to minimize performance impact and automatically delete outdated backups to control storage costs.
+It's particularly valuable for large-scale deployments where manual snapshot management would be time-consuming and error-prone.
+
+
+--object storage = each object includes data + uniqID + metadata(info about object)
+full rewrite req. to update an object,
+objects are organized in flat stucture called buckets
+best for files dont change infreq.(videos,images,logs)
+
+Object storage is a data storage architecture that manages data as objects in a flat address space.
+It offers unlimited scalability so you can store vast amounts of unstructured data without worrying about capacity constraints.
+Object storage provides enhanced metadata capabilities to provide more efficient data management, search, and analytics across massive datasets.
+
+The following is the primary AWS object storage service:
+
+*Amazon Simple Storage Service (S3)
+A fully managed scalable object storage service for storing and retrieving any amount of data from anywhere.
+store data as objects 
+store objects in buckets
+max object size of 5 tb
+u can version objects  
+
+An S3 bucket is a container for storing objects in Amazon S3.
+Buckets have a globally unique name across all of AWS, which helps to identify and organize your stored data.
+Buckets serve as the basic unit for access control and can hold a virtually unlimited number of objects.
+They play a crucial role in data management by making it possible to group related objects and apply policies at the bucket level.
+
+Storage Classes:
+
+*S3 Standart 
+S3 Standard is considered general-purpose storage for cloud applications, dynamic websites, content distribution,
+mobile and gaming applications,and big data analytics.
+
+*S3 Standard-Infrequent Access
+S3 Standard-Infrequent Access (S3 Standard-IA) is for data that is accessed less frequently 
+but requires rapid access when needed.This storage tier is ideal if you want to store 
+long-term backups, disaster recovery files, and so on.
+
+*S3 One Zone Infreq. Access
+S3 One Zone-Infrequent Access (S3 One Zone-IA) stores data in a single Availability Zone, 
+reducing costs compared to S3 Standard-IA, which uses three zones.
+It's perfect for storing secondary backups or easily recreatable data.
+
+*S3 Express One Zone
+
+*S3 Glacier
+-S3 Glacier Instant Retrieval
+-S3 Glacier Flexible Retrieval
+-S3 Glacier Deep Archive
+
+*S3 Lifecycle Policies -> sets up policies to move data from classes to classes
+*S3 Storage Class Analysis -> helps find us policies
+
+*S3 Intelligent Tiering = This tier is useful if your data has unknown or changing access patterns
+u dont need to set up policies 
+automaticly moves data from 4 different tiers based on its how often the data is accessed
+-Freq. Access
+-Infreq. Access
+-Archive Instant
+-Access Deep Archive
+
+
+*S3 Outposts
+Amazon S3 Outposts delivers object storage to your on-premises AWS Outposts environment using Amazon S3 APIs
+and features,and serves workloads with local data residency requirements. 
+
+
+--file storage = cloud based access through shared file systems(hierarchical file sys)
+straightfoward implementation without code changes
+best for app's needing shared file access
+
+AWS file storage services provide shared file systems accessible over networks, so multiple users and applications can access the same data simultaneously.
+They offer scalability and flexibility so you can expand storage capacity as needs grow without managing physical infrastructure.
+
+AWS offers two primary file storage services:
+
+*Amazon Elastic File System (EFS)
+A fully managed, scalable NFS file system for use with AWS Cloud services and on-premises resources.
+
+multiple instances can access the data in EFS at the same time
+
+when u create an efs it comes with preconfigured lifecycle policies
+
+efs automatically moves data between storage classes
+
+linux file system
+
+regional resource not redundant to az
+
+automatically scales
+
+*Amazon FSx
+A fully managed file storage services for popular file systems like Windows, Lustre, and NetApp ONTAP.
+
+Choose Amazon EFS for simple, serverless Linux file sharing (NFS) across multiple EC2 instances. 
+Choose Amazon FSx when you need a specialized, high-performance file system, require Windows (SMB) compatibility, or need advanced 
+enterprise features like NetApp ONTAP, ZFS, or sub-millisecond latency for heavy database workloads
+
+additional services that dont quite fit in a category:
+
+*AWS Storage Gateway
+A fully managed, hybrid-cloud storage service that provides on-premises access to virtually unlimited cloud storage.
+AWS Storage Gateway = Storage Gateway is a hybrid cloud storage service that makes it 
+possible to seamlessly integrate on-premises environments with AWS Cloud storage. 
+
+-You can use it to extend your local storage to the cloud while maintaining 
+low-latency access to frequently used data.
+
+*S3 File Gateway = for s3
+
+*Volume Gateway = creates block storage volumes locally data is backed up with ebs snapshots
+Volume Gateway operates in two main configurations:
+
+Cached volume mode stores primary data in the cloud while frequently accessed data is cached locally for low-latency access.
+
+Stored volume mode locally keeps your complete dataset while asynchronously backing it up to the cloud as EBS snapshots.
+
+*Tape Gateway = makes it possible to replace physical tape infrastructure with virtual tape capabilities while 
+benefitting from the durability and scalability of AWS Cloud storage.
+
+*AWS Elastic Disaster Recovery
+A fully managed service that streamlines the recovery of your physical, virtual, and cloud-based servers into AWS.
+
+
+__module 7__
+
+amazon relational database services (rds)
+
+
+
+
+
+
+
