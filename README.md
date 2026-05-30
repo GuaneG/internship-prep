@@ -104,3 +104,11 @@
 - [Kaggle Intro to SQL summary - Markdown](notes/day02/notes-for-sql-practice-and-bigquery.md)
 - [Kaggle Intro to SQL summary - Jupyter Notebook](notes/day02/notes-for-sql-practice-and-bigquery.ipynb)
 
+## Pandas Öğrenimi
+
+- [Pandas Öğrenimi için benim notlarım](pandas-analysis/05_pandas_learning.py)
+- [Kaggle Pandas summary - Markdown](notes/day05/kaggle_pandas_summary.md)
+- [Kaggle Pandas summary - Jupyter Notebook](notes/day05/kaggle_pandas_summary.ipynb)
+
+
+

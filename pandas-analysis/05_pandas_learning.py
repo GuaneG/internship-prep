@@ -278,6 +278,7 @@ my_print(grades.year.mean())
 my_print(grades.department.unique())
 
 # To see a list of unique values and how often they occur in the dataset, we can use the value_counts() method:
+# Works like a groupby operation, grouping by the unique values in the Series and then counting the number of records in each group.
 
 my_print(grades.department.value_counts())
 
@@ -297,7 +298,262 @@ my_print(grades.department.value_counts())
 # There are two mapping methods that you will use often.
 
 # map() is the first, and slightly simpler one. 
-# For example, suppose that we wanted to remean the scores the wines received to 0. We can do this as follows:
+# For example, suppose that we wanted to see the difference student grades the from the mean of grades. We can do this as follows:
+
+my_print("Mean of math grades is:", grades.math.mean())
+my_print(grades.math.map(lambda x: x - grades.math.mean()))
+
+# The function you pass to map() should expect a single value from the Series (a grade value, in the above example), and return a transformed version of that value. 
+# map() returns a new Series where all the values have been transformed by your function.
 
 
+# apply() is the equivalent method if we want to transform a whole DataFrame by calling a custom method on each row.
+
+def difference_from_mean(row):
+    row["math_diff"] = row["math"] - grades["math"].mean()
+    row["english_diff"] = row["english"] - grades["english"].mean()
+    return row
+
+# farklı farklı çalıştırma şekillerinde gördüklerim:
+# eğer direk row["math_diff"] = row.math - grades.math.mean() ifadesini yazarsam, bütün rowlara math_diff columnu eklenir ve mean değeriyle arasındaki farkı gösterir.
+# Ancak row.math_diff = row.math - grades.math.mean() ifadesini yazarsam, bir değişim göremedim. 
+# Bunun sebebi, eğer math_diff adlı bir column yoksa, row.math_diff ifadesi yeni bir column oluşturmaz. Sadece row nesnesine math_diff adında yeni bir attribute ekler ve ona row.math - grades.math.mean() değerini atar. 
+# Ancak bu attribute, DataFrame'in geri kalanında görünmez ve sadece difference_from_mean fonksiyonu içinde kullanılabilir. 
+# Eğer var olan bir columnun üstüne yazmak istiyorsam, örneğin math, o zaman direk row.math = row.math - grades.math.mean() ifadesini yazabilirim. 
+# Bu durumda math columnu güncellenir ve mean değeriyle arasındaki farkı gösterir.
+
+# ayrı bir not:
+# math columna row.math ile erişilebiliriz fakat bu attribute access öncelikli bir 
+# erişim yöntemi olduğundan row["math"] erişimi daha safe bir kullanımdır. 
+# row["mean"]    Eğer varsacolumn değerini verir
+# row.mean       Eğer varsa Series'in mean metodunu verir
+
+
+my_print("Mean of math grades and english grades is:", grades.math.mean(),grades.english.mean())
+my_print(grades.apply(difference_from_mean, axis="columns")) 
+
+# difference_from_mean fonksiyonunu her rowa uygular. axis="columns" ifadesi fonksiyonun her rowa uygulanacağını belirtir. 
+# Eğer axis="index" olsaydı, fonksiyon her columna uygulanırdı.
+
+
+# Maps allow us to transform data in a DataFrame or Series one value at a time for an entire column.
+# However, often we want to group our data, and then do something specific to the group the data is in.
+
+# As you'll learn, we do this with the groupby() operation. 
+# We'll also cover some additional topics, such as more complex ways to index your DataFrames, along with how to sort your data.
+
+
+
+# Groupwise analysis
+
+# One function we've been using heavily thus far is the value_counts() function. 
+# We can replicate what value_counts() does by doing the following:
+
+my_print(grades.department.value_counts())
+my_print(grades.groupby("department").department.count()) 
+
+# both do the same thing.
+
+# groupby() created a group of grades which allotted the same department values to the given students.
+# Then, for each of these groups, we grabbed the department column and counted how many times it appeared.
+# value_counts() is just a shortcut to this groupby() operation.
+
+# We can use any of the summary functions we've used before with this data. 
+# For example, to get the worst grade in each department category, we can do the following:
+
+my_print(grades.groupby("department").math.min())
+
+# You can think of each group we generate as being a slice of our DataFrame containing only data with values that match.
+# This DataFrame is accessible to us directly using the apply() method, and we can then manipulate the data in any way we see fit.
+# For example, here's one way of selecting the name of the student with the worst math grade in each department:
+
+def worst_math_student(group):
+    worst_student = group.loc[group.math.idxmin(), "first_name"]
+    return worst_student
+
+my_print(grades.groupby("department").apply(worst_math_student))
+
+# For even more fine-grained control, you can also group by more than one column.
+# For an example, to get the worst math grade for each department and year, we can do the following:
+
+my_print(grades.groupby(["department", "year"]).math.min())
+
+my_print(grades.groupby(["department", "year"]).apply(worst_math_student))
+
+
+# Another groupby() method worth mentioning is agg(), 
+# which lets you run a bunch of different functions on your DataFrame simultaneously.
+# For example, we can generate a simple statistical summary of the dataset as follows
+
+my_print(grades.groupby("department").math.agg([len, min, max]))
+
+# Effective use of groupby() will allow you to do lots of really powerful things with your dataset.
+
+
+
+# Multi-indexes
+
+# In all of the examples we've seen thus far we've been working with DataFrame or Series objects with a single-label index.
+# groupby() is slightly different in the fact that, depending on the operation we run,
+# it will sometimes result in what is called a multi-index.
+# A multi-index differs from a regular index in that it has multiple levels. For example:
+
+min_grades_for_math = grades.groupby(["department", "year"]).math.min()
+
+multi_index = min_grades_for_math.index
+
+# Multi-indices have several methods for dealing with their tiered structure which are absent for single-level indices. 
+# They also require two levels of labels to retrieve a value.
+# Dealing with multi-index output is a common "gotcha" for users new to pandas.
+
+# The use cases for a multi-index are detailed alongside instructions on using them in the MultiIndex / Advanced Selection section of the pandas documentation.
+
+# However, in general the multi-index method you will use most often 
+# is the one for converting back to a regular index, the reset_index() method:
+
+my_print(min_grades_for_math.reset_index())
+
+
+
+# Sorting
+
+# Looking again at min_grades_for_math we can see that grouping returns data in index order, not in value order. 
+# That is to say, when outputting the result of a groupby, the order of the rows is dependent on the values in the index, not in the data.
+# To get data in the order want it in we can sort it ourselves. The sort_values() method is handy for this.
+
+min_grades_for_math_sorted = min_grades_for_math.reset_index().sort_values("math")
+
+my_print(min_grades_for_math_sorted)
+
+# now data is sorted by math grade, from lowest to highest. If we wanted to sort it from highest to lowest, we could have done the following:
+
+my_print(min_grades_for_math.reset_index().sort_values("math", ascending=False))
+
+# To sort by index values, use the companion method sort_index(). This method has the same arguments and default order:
+
+my_print(min_grades_for_math.sort_index())
+
+# Finally, know that you can sort by more than one column at a time:
+
+my_print(min_grades_for_math.reset_index().sort_values(["year", "math"]))
+
+
+# Dtypes
+
+# The data type for a column in a DataFrame or a Series is known as the dtype.
+
+# You can use the dtype property to grab the type of a specific column.
+# For instance, we can get the dtype of the math column in the grades DataFrame:
+
+my_print(grades.math.dtype)
+
+# Alternatively, the dtypes property returns the dtype of every column in the DataFrame:
+
+my_print(grades.dtypes)
+
+# Data types tell us something about how pandas is storing the data internally.
+# float64 means that it's using a 64-bit floating point number; 
+# int64 means a similarly sized integer instead, and so on
+
+# One peculiarity to keep in mind is that columns consisting entirely of strings do not get their own type; 
+# they are instead given the object type.
+
+# It's possible to convert a column of one type into another wherever such a conversion makes sense by using the astype() function. 
+# For example, we may transform the math column from its existing int64 data type into a float64 data type:
+
+my_print(grades.math.astype(float))
+
+# A DataFrame or Series index has its own dtype, too:
+
+my_print(grades.index.dtype)
+
+# Pandas also supports more exotic data types, such as categorical data and timeseries data.
+# Because these data types are more rarely used, we will omit them until a much later section of this tutorial.
+
+
+
+# Missing Data
+
+# Entries missing values are given the value NaN, short for "Not a Number".
+# For technical reasons these NaN values are always of the float64 dtype.
+
+# Pandas provides some methods specific to missing data. 
+# To select NaN entries you can use pd.isnull() (or its companion pd.notnull()). 
+# This is meant to be used thusly:
+
+my_print(grades.loc[pd.isnull(grades.programming), :]) 
+# programming'ten null olan rowları ve bütün columnları seçer. 
+# pd.isnull(grades.programming) ifadesi programming'ten null olan rowları seçer. : ifadesi ise bütün columnları seçer.
+# null değer olmadığı için boş bir DataFrame döndürür.
+
+# Replacing missing values is a common operation. Pandas provides a really handy method for this problem:
+# fillna(). fillna() provides a few different strategies for mitigating such data. 
+# For example, to replace all NaN values in the programming column with 0, we can do the following:
+
+my_print(grades.programming.fillna(0))
+
+# Or we could fill each missing value with the first non-null value that appears sometime after the given record in the database.
+# This is known as the backfill strategy.
+
+# Alternatively, we may have a non-null value that we would like to replace.
+# For example, suppose that since this dataset was published,student names have changed.
+# One way to reflect this in the dataset is using the replace() method:
+
+my_print(grades.first_name.replace("Tuna", "Tuana"))
+
+# The replace() method is worth mentioning here because it's handy for replacing missing data which is 
+# given some kind of sentinel value in the dataset: things like "Unknown", "Undisclosed", "Invalid", and so on.
+
+
+
+# Oftentimes data will come to us with column names, index names, or other naming conventions that we are not satisfied with. 
+# In that case, you'll learn how to use pandas functions to change the names of the offending entries to something better.
+
+# You'll also explore how to combine data from multiple DataFrames and/or Series.
+
+
+# Renaming
+
+# The first function we'll introduce here is rename(), which lets you change index names and/or column names. 
+# For example, to change the math column in our dataset to score, we would do:
+# rename(columns={"old_name": "new_name"}) or rename(index={"old_name": "new_name"})
+
+my_print(grades.rename(columns={"math": "math_grades","programming": "programming_grades"}), isToBePrinted=True)
+
+# You can change index names in the same way:
+
+my_print(grades.rename(index={1001: "student1", 1002: "student2"}))
+
+# You can also use the rename_axis() method to change the name of the index itself:
+
+my_print(grades.rename_axis("student_id",axis="rows"), isToBePrinted=True)
+
+
+
+# Combining DataFrames
+
+# When performing operations on a dataset, we will sometimes need to combine different DataFrames and/or Series in non-trivial ways.
+# Pandas has three core methods for doing this.
+# In order of increasing complexity, these are concat(), join(), and merge().
+# Most of what merge() can do can also be done more simply with join(), so we will omit it and focus on the first two functions here.
+
+# The simplest combining method is concat(). Given a list of elements, this function will smush those elements together along an axis.
+
+# This is useful when we have data in different DataFrame or Series objects but having the same fields (columns).
+
+# canadian_youtube = pd.read_csv("../input/youtube-new/CAvideos.csv")
+# british_youtube = pd.read_csv("../input/youtube-new/GBvideos.csv")
+
+# pd.concat([canadian_youtube, british_youtube])
+
+
+# The middlemost combiner in terms of complexity is join(). join() lets you combine different DataFrame objects which have an index in common. 
+
+# left = canadian_youtube.set_index(['title', 'trending_date'])
+# right = british_youtube.set_index(['title', 'trending_date'])
+
+# left.join(right, lsuffix='_CAN', rsuffix='_UK')
+
+# The lsuffix and rsuffix parameters are necessary here because the data has the same column names in both British and Canadian datasets. 
+# If this wasn't true (because, say, we'd renamed them beforehand) we wouldn't need them.
 
