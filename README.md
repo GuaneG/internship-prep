@@ -4,6 +4,10 @@
 
  ### Dosya yapısı
  `çalışılan-gün_çalışılan-konu_çalışılan-konu-altbaşlığı.extension`
+ * Örn
+ `01_python_basics.py`
+
+ 
 
 ---
 
