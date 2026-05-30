@@ -36,29 +36,31 @@
 #### Python data temeli [✅]
     * Python’u data işlemleri için hızlıca tekrar etmek.
     * Kaynak = Kaggle Learn - Python
-    **Not Eklendi --> notes/notes-for-python-basics.txt**
+    **Not Eklendi**
 #### SQL temel tekrar [✅]
     * SELECT, WHERE, ORDER BY, DISTINCT, AND, OR konularını tekrar etmek.
     * Kaynak = Kaggle Learn - Intro to SQL     
-    **Not Eklendi --> notes/notes-for-sql-practice-and-bigquery.md**
+    **Not Eklendi**
 #### SQL JOIN mantığı [✅]
     * Tabloları bağlamayı tekrar etmek.
     * Kaynak = Kaggle Learn - Intro to SQL
-    **Not Eklendi --> notes/kaggle_intro_to_sql_summary.md**
+    **Not Eklendi**
 #### SQL GROUP BY + aggregate functions [✅]
     * Veriyi gruplama ve özetleme mantığını oturtmak.        
     * Kaynak = Kaggle Learn - Intro to SQL
-    **Not Eklendi --> notes/kaggle_intro_to_sql_summary.md*
+    **Not Eklendi**
 #### SQL subquery + CASE WHEN [ ]
     * Analitik sorgular yazmaya başlamak..        
     * Kaynak = Kaggle Learn - Advanced SQL başlangıcı    
-#### Pandas başlangıç [ ]
+#### Pandas başlangıç [✅]
     * CSV okuyup temel DataFrame işlemleri yapabilmek.        
     * Kaynak = Kaggle Learn - Pandas
     * Kaynak = pandas official getting started tutorials
-#### Pandas groupby + veri temizleme [ ]
+    **Not Eklendi**
+#### Pandas groupby + veri temizleme [✅]
     * Pandas ile analiz yapmaya başlamak.        
     * Kaynak = pandas official getting started tutorials
+    **Not eklendi(pandas başlangıç notlarıyla karışık olarak)**
 
 ---
    
